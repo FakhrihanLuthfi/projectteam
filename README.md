@@ -1,2 +1,0 @@
-# projectteam
-just project

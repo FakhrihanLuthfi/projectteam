@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">My App</a>
+      <a class="navbar-brand" href="#">My Kost</a>
       <div class="d-flex">
         <button class="btn btn-outline-primary">Logout</button>
       </div>
