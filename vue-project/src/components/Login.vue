@@ -1,5 +1,8 @@
 <script setup>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const username = ref('')
 const password = ref('')
@@ -8,7 +11,7 @@ const error = ref('')
 const handleLogin = () => {
   if (username.value === 'admin' && password.value === '1234') {
     localStorage.setItem('isLoggedIn', 'true')
-    alert('Login berhasil!')
+    router.push({ name: 'Dashboard' }) // langsung ke dashboard
   } else {
     error.value = 'Username atau password salah!'
   }

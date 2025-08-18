@@ -1,8 +1,8 @@
 <template>
   <v-app>
     <!-- App Bar -->
-    <v-app-bar color="primary" dark app flat>
-      <v-toolbar-title>KOSTKU</v-toolbar-title>
+    <v-app-bar app flat>
+
     </v-app-bar>
 
     <v-main>
@@ -10,13 +10,7 @@
         <!-- Header & Action Button -->
         <div class="d-flex justify-space-between align-center mb-6">
           <h1 class="text-h4 font-weight-bold text-primary m-0">Home</h1>
-          <v-btn
-            color="success"
-            prepend-icon="mdi-plus"
-            rounded="lg"
-            elevation="1"
-            class="px-4"
-          >
+          <v-btn color="success" prepend-icon="mdi-plus" rounded="lg" elevation="1" class="px-4">
             Tambah Penghuni
           </v-btn>
         </div>
@@ -26,12 +20,8 @@
           <!-- Penghuni Aktif -->
           <v-col cols="12" md="4">
             <v-hover v-slot="{ isHovering, props }">
-              <v-card
-                v-bind="props"
-                class="pa-4 transition-swing"
-                color="grey-lighten-5"
-                :elevation="isHovering ? 8 : 2"
-              >
+              <v-card v-bind="props" class="pa-4 transition-swing" color="grey-lighten-5"
+                :elevation="isHovering ? 8 : 2">
                 <v-card-title class="d-flex align-center">
                   <v-icon color="primary" class="mr-2">mdi-account-multiple</v-icon>
                   <span class="font-weight-medium">Penghuni Aktif</span>
@@ -47,12 +37,8 @@
           <!-- Pendapatan Bulan Ini -->
           <v-col cols="12" md="4">
             <v-hover v-slot="{ isHovering, props }">
-              <v-card
-                v-bind="props"
-                class="pa-4 transition-swing"
-                color="grey-lighten-5"
-                :elevation="isHovering ? 8 : 2"
-              >
+              <v-card v-bind="props" class="pa-4 transition-swing" color="grey-lighten-5"
+                :elevation="isHovering ? 8 : 2">
                 <v-card-title class="d-flex align-center">
                   <v-icon color="success" class="mr-2">mdi-cash-multiple</v-icon>
                   <span class="font-weight-medium">Pendapatan Bulan Ini</span>
@@ -68,12 +54,8 @@
           <!-- Kamar Tersedia -->
           <v-col cols="12" md="4">
             <v-hover v-slot="{ isHovering, props }">
-              <v-card
-                v-bind="props"
-                class="pa-4 transition-swing"
-                color="grey-lighten-5"
-                :elevation="isHovering ? 8 : 2"
-              >
+              <v-card v-bind="props" class="pa-4 transition-swing" color="grey-lighten-5"
+                :elevation="isHovering ? 8 : 2">
                 <v-card-title class="d-flex align-center">
                   <v-icon color="warning" class="mr-2">mdi-door-open</v-icon>
                   <span class="font-weight-medium">Kamar Tersedia</span>
@@ -98,10 +80,7 @@
               </v-card-title>
               <v-card-text>
                 <p class="text-subtitle-2 text-grey">Pendapatan 6 bulan terakhir</p>
-                <div
-                  class="bg-grey-lighten-4 rounded-lg d-flex align-center justify-center"
-                  style="height: 200px;"
-                >
+                <div class="bg-grey-lighten-4 rounded-lg d-flex align-center justify-center" style="height: 200px;">
                   <span class="text-grey-darken-2">[Grafik di sini]</span>
                 </div>
               </v-card-text>

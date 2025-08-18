@@ -1,58 +1,58 @@
 <template>
-  <v-app>
-    <v-app-bar color="primary" dark app flat>
-      <v-toolbar-title class="d-flex align-center">
-        <v-icon class="me-2">mdi-home-city</v-icon>
-        KostEase
-      </v-toolbar-title>
-    </v-app-bar>
+  <v-navigation-drawer
+    v-model="drawer"
+    color="primary"
+    dark
+    :permanent="!isMobile"
+    :temporary="isMobile"
+    width="280"
+    class="sidebar"
+  >
+    <!-- Logo & Brand -->
+    <div class="d-flex align-center pa-4">
+      <v-icon size="28" class="me-2">mdi-home-city</v-icon>
+      <span class="text-h6 font-weight-bold">KostEase</span>
+    </div>
 
-    <v-navigation-drawer
-      v-model="drawer"
-      color="primary"
-      dark
-      :permanent="!isMobile"
-      :temporary="isMobile"
-      width="350"
-      class="sidebar"
-    >
-      <!-- Menu Items -->
-      <v-list dense nav class="pt-2">
-        <v-list-item
-          v-for="item in menuItems"
-          :key="item.value"
-          :prepend-icon="item.icon"
-          :title="item.title"
-          :value="item.value"
-          :active="activeMenu === item.value"
-          @click="selectMenu(item.value)"
-          class="rounded-lg mb-1"
-        />
-      </v-list>
+    <v-divider></v-divider>
 
-      <!-- Profil Admin (pojok kiri bawah mentok) -->
-      <div class="admin-section pa-4 d-flex align-center">
-        <v-avatar color="white" size="40">
-          <v-icon color="primary">mdi-account-circle</v-icon>
-        </v-avatar>
-        <div class="ml-3">
-          <div class="font-weight-medium">Admin Kost</div>
-          <div class="text-caption text-white-70">admin@kostku.com</div>
-        </div>
+    <!-- Menu Items -->
+    <v-list dense nav class="pt-2">
+      <v-list-item
+        v-for="item in menuItems"
+        :key="item.value"
+        :prepend-icon="item.icon"
+        :title="item.title"
+        :value="item.value"
+        :active="activeMenu === item.value"
+        @click="selectMenu(item.value)"
+        class="rounded-lg mb-1"
+      />
+    </v-list>
+
+    <!-- Profil Admin (pojok kiri bawah) -->
+    <div class="admin-section pa-4 d-flex align-center mt-auto">
+      <v-avatar color="white" size="40">
+        <v-icon color="primary">mdi-account-circle</v-icon>
+      </v-avatar>
+      <div class="ml-3">
+        <div class="font-weight-medium">Admin Kost</div>
+        <div class="text-caption text-white-70">admin@kostku.com</div>
       </div>
+    </div>
 
-      <!-- Toggle Button -->
-      <v-btn
-        icon
-        class="sidebar-toggle"
-        @click="drawer = !drawer"
-        :class="{ rotated: !drawer }"
-      >
-        <v-icon>mdi-chevron-left</v-icon>
-      </v-btn>
-    </v-navigation-drawer>
-  </v-app>
+    <!-- Toggle Button -->
+    <v-btn
+      icon
+      class="sidebar-toggle"
+      @click="drawer = !drawer"
+      :class="{ rotated: !drawer }"
+    >
+      <v-icon>mdi-chevron-left</v-icon>
+    </v-btn>
+  </v-navigation-drawer>
 </template>
+
 
 <script setup>
 import { ref, computed } from "vue"
