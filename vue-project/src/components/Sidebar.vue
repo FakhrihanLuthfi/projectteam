@@ -5,17 +5,9 @@
     dark
     :permanent="!isMobile"
     :temporary="isMobile"
-    width="280"
+    :width="isMobile ? 220 : 280"
     class="sidebar"
   >
-    <!-- Logo & Brand -->
-    <div class="d-flex align-center pa-4">
-      <v-icon size="28" class="me-2">mdi-home-city</v-icon>
-      <span class="text-h6 font-weight-bold">KostEase</span>
-    </div>
-
-    <v-divider></v-divider>
-
     <!-- Menu Items -->
     <v-list dense nav class="pt-2">
       <v-list-item
@@ -30,7 +22,7 @@
       />
     </v-list>
 
-    <!-- Profil Admin (pojok kiri bawah) -->
+    <!-- Profil Admin -->
     <div class="admin-section pa-4 d-flex align-center mt-auto">
       <v-avatar color="white" size="40">
         <v-icon color="primary">mdi-account-circle</v-icon>
@@ -43,6 +35,7 @@
 
     <!-- Toggle Button -->
     <v-btn
+      v-if="isMobile"
       icon
       class="sidebar-toggle"
       @click="drawer = !drawer"
@@ -53,9 +46,8 @@
   </v-navigation-drawer>
 </template>
 
-
 <script setup>
-import { ref, computed } from "vue"
+import { ref, computed, watch } from "vue"
 import { useDisplay } from "vuetify"
 
 const drawer = ref(true)
@@ -63,6 +55,11 @@ const activeMenu = ref("home")
 
 const { mdAndDown } = useDisplay()
 const isMobile = computed(() => mdAndDown.value)
+
+// Atur default drawer: desktop terbuka, mobile tertutup
+watch(isMobile, (val) => {
+  drawer.value = !val
+}, { immediate: true })
 
 const menuItems = [
   { title: "Home", value: "home", icon: "mdi-home-circle-outline" },
@@ -75,7 +72,7 @@ const menuItems = [
 
 function selectMenu(value) {
   activeMenu.value = value
-  if (isMobile.value) drawer.value = false
+  if (isMobile.value) drawer.value = false // auto tutup setelah pilih menu di mobile
 }
 </script>
 
@@ -89,7 +86,7 @@ function selectMenu(value) {
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 100%; /* biar full lebar sidebar */
+  width: 100%;
 }
 
 /* Toggle Button */

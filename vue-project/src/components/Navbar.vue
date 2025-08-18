@@ -5,6 +5,10 @@
 
     <v-spacer></v-spacer> -->
 
+    <div class="d-flex align-center pa-4">
+      <v-icon size="28" class="me-2">mdi-home-city</v-icon>
+      <span class="text-h6 font-weight-bold">KostEase</span>
+    </div>
     <!-- Tombol Logout Putih -->
      <v-spacer></v-spacer>
     <v-btn color="white" variant="contained" @click="handleLogout">

@@ -79,6 +79,7 @@ const handleLogin = () => {
 .brand-content {
   text-align: center;
   color: white;
+  padding: 1rem;
 }
 .brand-title {
   font-size: 2.4rem;
@@ -104,25 +105,23 @@ const handleLogin = () => {
   justify-content: center;
   align-items: center;
   background: #f9fafb;
-  padding: 0 0.5rem; /* hanya kiri-kanan 0.5rem */
+  padding: 0 0.5rem;
 }
 
-
-/* Konten login (tanpa card) */
+/* Konten login */
 .login-content {
   width: 90%;
-  max-width: 100%; /* biar full */
-  padding: 2rem 2rem; /* kasih jarak aman kiri-kanan */
+  max-width: 100%;
+  padding: 2rem 2rem;
 }
-
 
 .login-header {
   display: flex;
   align-items: center;
-  justify-content: center; /* ini bikin isi rata tengah */
+  justify-content: center;
   gap: 8px;
   margin-bottom: 0.5rem;
-  text-align: center; /* supaya teksnya ikut rata tengah */
+  text-align: center;
 }
 
 .login-icon {
@@ -197,4 +196,36 @@ const handleLogin = () => {
   font-size: 0.9rem;
   margin-top: 10px;
 }
+
+/* 📱 Responsif untuk mobile */
+@media (max-width: 768px) {
+  .login-wrapper {
+    flex-direction: column; /* ubah jadi vertikal */
+  }
+
+  .login-left {
+    flex: none;
+    height: 200px; /* tinggi gambar di atas */
+  }
+
+  .login-right {
+    flex: none;
+    height: auto;
+    padding: 1rem;
+  }
+
+  .brand-title {
+    font-size: 1.8rem;
+  }
+  .brand-subtitle {
+    font-size: 1rem;
+  }
+  .login-content {
+    padding: 1.5rem 1rem;
+    width: 100%;
+    max-width: 400px;
+    margin: auto;
+  }
+}
 </style>
+
