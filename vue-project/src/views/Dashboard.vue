@@ -21,9 +21,7 @@
               <v-icon color="primary" class="mr-2">mdi-account-multiple</v-icon>
               <span class="font-weight-medium">Penghuni Aktif</span>
             </v-card-title>
-            <v-card-text class="text-h5 font-weight-bold">
-              45 Orang
-            </v-card-text>
+            <v-card-text class="text-h5 font-weight-bold"> 45 Orang </v-card-text>
             <v-card-actions>
               <v-btn text small color="primary">Lihat Detail</v-btn>
             </v-card-actions>
@@ -44,9 +42,7 @@
               <v-icon color="success" class="mr-2">mdi-cash-multiple</v-icon>
               <span class="font-weight-medium">Pendapatan Bulan Ini</span>
             </v-card-title>
-            <v-card-text class="text-h5 font-weight-bold text-success">
-              Rp 25.000.000
-            </v-card-text>
+            <v-card-text class="text-h5 font-weight-bold text-success"> Rp 25.000.000 </v-card-text>
             <v-card-actions>
               <v-btn text small color="success">Lihat Laporan</v-btn>
             </v-card-actions>
@@ -90,7 +86,7 @@
             <p class="text-subtitle-2 text-grey">Pendapatan 6 bulan terakhir</p>
             <div
               class="bg-grey-lighten-4 rounded-lg"
-              style="height:200px; display:flex; align-items:center; justify-content:center;"
+              style="height: 200px; display: flex; align-items: center; justify-content: center"
             >
               <span class="text-grey-darken-2">[Grafik di sini]</span>
             </div>
@@ -163,12 +159,9 @@
   </v-container>
 </template>
 
-<script setup>
-
-</script>
+<script setup></script>
 
 <style scoped>
-
 .transition-swing {
   transition: all 0.3s ease-in-out;
 }

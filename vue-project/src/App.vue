@@ -4,6 +4,7 @@ import Sidebar from "./components/Sidebar.vue";
 import Navbar from "./components/Navbar.vue";
 
 const route = useRoute();
+
 </script>
 
 <template>
@@ -29,6 +30,6 @@ const route = useRoute();
 
 <style>
 body {
-  margin: 0;
+  margin: 0;
 }
 </style>
