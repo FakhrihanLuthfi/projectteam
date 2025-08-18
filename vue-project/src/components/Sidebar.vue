@@ -1,24 +1,25 @@
 <template>
   <v-app>
-    <!-- App Bar -->
     <v-app-bar color="primary" dark app flat>
-      <v-app-bar-nav-icon @click="drawer = !drawer" />
-      <v-toolbar-title>KOSTKU</v-toolbar-title>
+      <v-toolbar-title class="d-flex align-center">
+      <v-icon class="me-2">mdi-home-city</v-icon>
+      KostEase
+    </v-toolbar-title>
     </v-app-bar>
 
-    <!-- Sidebar tanpa app supaya tidak ada space -->
     <v-navigation-drawer
       v-model="drawer"
       color="primary"
       dark
       :permanent="!isMobile"
       :temporary="isMobile"
-      width="250"
+      width="350"
+      class="sidebar"
     >
-      <!-- User Info -->
+      <!-- Profil Admin -->
       <div class="pa-4 d-flex align-center">
         <v-avatar color="white" size="40">
-          <v-icon color="primary">mdi-account</v-icon>
+          <v-icon color="primary">mdi-account-circle</v-icon>
         </v-avatar>
         <div class="ml-3">
           <div class="font-weight-medium">Admin Kost</div>
@@ -28,7 +29,7 @@
 
       <v-divider class="mb-2"></v-divider>
 
-      <!-- Menu List -->
+      <!-- Menu Items -->
       <v-list dense nav>
         <v-list-item
           v-for="item in menuItems"
@@ -41,6 +42,16 @@
           class="rounded-lg mb-1"
         />
       </v-list>
+
+      <!-- Toggle Button -->
+      <v-btn
+        icon
+        class="sidebar-toggle"
+        @click="drawer = !drawer"
+        :class="{ rotated: !drawer }"
+      >
+        <v-icon>mdi-chevron-left</v-icon>
+      </v-btn>
     </v-navigation-drawer>
   </v-app>
 </template>
@@ -55,11 +66,14 @@ const activeMenu = ref("home")
 const { mdAndDown } = useDisplay()
 const isMobile = computed(() => mdAndDown.value)
 
+// Menu dengan icon yang lebih menarik
 const menuItems = [
-  { title: "Home", value: "home", icon: "mdi-home" },
-  { title: "Daftar Kamar", value: "rooms", icon: "mdi-door" },
-  { title: "Daftar Penyewa", value: "tenants", icon: "mdi-account-multiple" },
-  { title: "Pengaturan", value: "settings", icon: "mdi-cog" },
+  { title: "Home", value: "home", icon: "mdi-home-circle-outline" },
+  { title: "Daftar Kamar", value: "rooms", icon: "mdi-door-closed-lock" },
+  { title: "Daftar Penyewa", value: "tenants", icon: "mdi-account-group-outline" },
+  { title: "Laporan", value: "reports", icon: "mdi-file-chart-outline" },
+  { title: "Bantuan", value: "help", icon: "mdi-help-circle-outline" },
+   { title: "Pengaturan", value: "settings", icon: "mdi-cog-outline" },
 ]
 
 function selectMenu(value) {
@@ -69,12 +83,30 @@ function selectMenu(value) {
 </script>
 
 <style scoped>
-.v-list-item {
-  cursor: pointer;
-  transition: background-color 0.2s;
+.sidebar {
+  position: relative;
 }
 
-.v-list-item:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+/* Toggle Button */
+.sidebar-toggle {
+  position: absolute;
+  top: 50%;
+  right: -20px; /* geser keluar sidebar */
+  transform: translateY(-50%);
+  background-color: #1976d2;
+  color: white;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  transition: transform 0.3s ease;
+}
+
+/* Rotasi panah saat drawer tertutup */
+.sidebar-toggle.rotated {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.sidebar-toggle:hover {
+  background-color: #115293;
+  transform: translateY(-50%) scale(1.1);
 }
 </style>
