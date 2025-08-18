@@ -132,6 +132,10 @@
                     <v-list-item-title>Budi Hartono - Kamar C3</v-list-item-title>
                     <v-progress-linear color="primary" value="40" height="6" rounded />
                   </v-list-item>
+                  <v-list-item>
+                    <v-list-item-title>John Doe - Kamar C5</v-list-item-title>
+                    <v-progress-linear color="primary" value="40" height="6" rounded />
+                  </v-list-item>
                 </v-list>
               </v-card-text>
             </v-card>

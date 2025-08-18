@@ -2,9 +2,9 @@
   <v-app>
     <v-app-bar color="primary" dark app flat>
       <v-toolbar-title class="d-flex align-center">
-      <v-icon class="me-2">mdi-home-city</v-icon>
-      KostEase
-    </v-toolbar-title>
+        <v-icon class="me-2">mdi-home-city</v-icon>
+        KostEase
+      </v-toolbar-title>
     </v-app-bar>
 
     <v-navigation-drawer
@@ -16,21 +16,8 @@
       width="350"
       class="sidebar"
     >
-      <!-- Profil Admin -->
-      <div class="pa-4 d-flex align-center">
-        <v-avatar color="white" size="40">
-          <v-icon color="primary">mdi-account-circle</v-icon>
-        </v-avatar>
-        <div class="ml-3">
-          <div class="font-weight-medium">Admin Kost</div>
-          <div class="text-caption text-white-70">admin@kostku.com</div>
-        </div>
-      </div>
-
-      <v-divider class="mb-2"></v-divider>
-
       <!-- Menu Items -->
-      <v-list dense nav>
+      <v-list dense nav class="pt-2">
         <v-list-item
           v-for="item in menuItems"
           :key="item.value"
@@ -42,6 +29,17 @@
           class="rounded-lg mb-1"
         />
       </v-list>
+
+      <!-- Profil Admin (pojok kiri bawah mentok) -->
+      <div class="admin-section pa-4 d-flex align-center">
+        <v-avatar color="white" size="40">
+          <v-icon color="primary">mdi-account-circle</v-icon>
+        </v-avatar>
+        <div class="ml-3">
+          <div class="font-weight-medium">Admin Kost</div>
+          <div class="text-caption text-white-70">admin@kostku.com</div>
+        </div>
+      </div>
 
       <!-- Toggle Button -->
       <v-btn
@@ -66,14 +64,13 @@ const activeMenu = ref("home")
 const { mdAndDown } = useDisplay()
 const isMobile = computed(() => mdAndDown.value)
 
-// Menu dengan icon yang lebih menarik
 const menuItems = [
   { title: "Home", value: "home", icon: "mdi-home-circle-outline" },
   { title: "Daftar Kamar", value: "rooms", icon: "mdi-door-closed-lock" },
   { title: "Daftar Penyewa", value: "tenants", icon: "mdi-account-group-outline" },
   { title: "Laporan", value: "reports", icon: "mdi-file-chart-outline" },
   { title: "Bantuan", value: "help", icon: "mdi-help-circle-outline" },
-   { title: "Pengaturan", value: "settings", icon: "mdi-cog-outline" },
+  { title: "Pengaturan", value: "settings", icon: "mdi-cog-outline" },
 ]
 
 function selectMenu(value) {
@@ -87,11 +84,19 @@ function selectMenu(value) {
   position: relative;
 }
 
+/* Profil Admin fix pojok kiri bawah */
+.admin-section {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%; /* biar full lebar sidebar */
+}
+
 /* Toggle Button */
 .sidebar-toggle {
   position: absolute;
   top: 50%;
-  right: -20px; /* geser keluar sidebar */
+  right: -20px;
   transform: translateY(-50%);
   background-color: #1976d2;
   color: white;
@@ -100,7 +105,6 @@ function selectMenu(value) {
   transition: transform 0.3s ease;
 }
 
-/* Rotasi panah saat drawer tertutup */
 .sidebar-toggle.rotated {
   transform: translateY(-50%) rotate(180deg);
 }
