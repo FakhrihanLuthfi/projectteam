@@ -11,7 +11,7 @@
         <div class="d-flex justify-space-between align-center mb-6">
           <h1 class="text-h4 font-weight-bold text-primary m-0">Home</h1>
           <v-btn
-            color="primary"
+            color="success"
             prepend-icon="mdi-plus"
             rounded="lg"
             elevation="1"
