@@ -1,6 +1,10 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Login from "../components/Login.vue";
 import Dashboard from "../views/Dashboard.vue";
+import Room from "@/components/Room.vue";
+import Tenant from "@/components/Tenant.vue";
+import Settings from "@/components/Settings.vue";
+import Help from "@/components/Help.vue";
 
 const routes = [
   {
@@ -14,6 +18,28 @@ const routes = [
     name: "Dashboard",
     component: Dashboard,
     meta: { requiresAuth: true }, // butuh login
+  },
+   { 
+    path: "/rooms", 
+    name: "rooms", 
+    component: Room
+  },
+  {
+    path: "/tenants",
+    name: "tenants",
+    component: Tenant,   // ⬅️ route daftar penyewa
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/settings", 
+    name: "settings", 
+    component: Settings,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/help", 
+    name: "help", 
+    component: Help 
   },
 ];
 

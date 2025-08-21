@@ -1,60 +1,76 @@
 <template>
-  <v-navigation-drawer
-    v-model="drawer"
-    color="primary"
-    dark
-    :permanent="!isMobile"
-    :temporary="isMobile"
-    :width="isMobile ? 220 : 280"
-    class="sidebar"
-  >
-    <!-- Menu Items -->
-    <v-list dense nav class="pt-2">
-      <v-list-item
-        v-for="item in menuItems"
-        :key="item.value"
-        :prepend-icon="item.icon"
-        :title="item.title"
-        :value="item.value"
-        :active="activeMenu === item.value"
-        @click="selectMenu(item.value)"
-        class="rounded-lg mb-1"
-      />
-    </v-list>
+  <div>
+    <!-- Sidebar -->
+    <v-navigation-drawer
+      v-model="drawer"
+      color="primary"
+      dark
+      :permanent="!isMobile"
+      :temporary="isMobile"
+      :width="isMobile ? 220 : 280"
+      class="sidebar"
+    >
+      <!-- Menu Items -->
+      <v-list dense nav class="pt-2">
+        <v-list-item
+          v-for="item in menuItems"
+          :key="item.value"
+          :prepend-icon="item.icon"
+          :title="item.title"
+          :value="item.value"
+          :active="activeMenu === item.value"
+          @click="selectMenu(item.value)"
+          class="rounded-lg mb-1"
+        />
+      </v-list>
 
-    <!-- Profil Admin -->
-    <div class="admin-section pa-4 d-flex align-center mt-auto">
-      <v-avatar color="white" size="40">
-        <v-icon color="primary">mdi-account-circle</v-icon>
-      </v-avatar>
-      <div class="ml-3">
-        <div class="font-weight-medium">Admin Kost</div>
-        <div class="text-caption text-white-70">admin@kostku.com</div>
+      <!-- Profil Admin -->
+      <div class="admin-section pa-4 d-flex align-center mt-auto">
+        <v-avatar color="white" size="40">
+          <v-icon color="primary">mdi-account-circle</v-icon>
+        </v-avatar>
+        <div class="ml-3">
+          <div class="font-weight-medium">Admin Kost</div>
+          <div class="text-caption text-white-70">admin@kostku.com</div>
+        </div>
       </div>
-    </div>
 
-    <!-- Toggle Button -->
+      <!-- Toggle button di DESKTOP (nempel di drawer) -->
+      <v-btn
+        v-if="!isMobile"
+        icon
+        class="sidebar-toggle-inside"
+        @click="drawer = !drawer"
+        :class="{ rotated: !drawer }"
+      >
+        <v-icon>mdi-chevron-left</v-icon>
+      </v-btn>
+    </v-navigation-drawer>
+
+    <!-- Toggle button di MOBILE (fixed di luar drawer) -->
     <v-btn
       v-if="isMobile"
       icon
-      class="sidebar-toggle"
+      class="sidebar-toggle-outside"
       @click="drawer = !drawer"
       :class="{ rotated: !drawer }"
     >
       <v-icon>mdi-chevron-left</v-icon>
     </v-btn>
-  </v-navigation-drawer>
+  </div>
 </template>
 
 <script setup>
 import { ref, computed, watch } from "vue"
 import { useDisplay } from "vuetify"
+import { useRouter } from "vue-router"
 
 const drawer = ref(true)
 const activeMenu = ref("home")
 
 const { mdAndDown } = useDisplay()
 const isMobile = computed(() => mdAndDown.value)
+const router = useRouter()
 
 // Atur default drawer: desktop terbuka, mobile tertutup
 watch(isMobile, (val) => {
@@ -62,7 +78,7 @@ watch(isMobile, (val) => {
 }, { immediate: true })
 
 const menuItems = [
-  { title: "Home", value: "home", icon: "mdi-home-circle-outline" },
+  { title: "Home", value: "Dashboard", icon: "mdi-home-circle-outline" },
   { title: "Daftar Kamar", value: "rooms", icon: "mdi-door-closed-lock" },
   { title: "Daftar Penyewa", value: "tenants", icon: "mdi-account-group-outline" },
   { title: "Laporan", value: "reports", icon: "mdi-file-chart-outline" },
@@ -72,9 +88,12 @@ const menuItems = [
 
 function selectMenu(value) {
   activeMenu.value = value
-  if (isMobile.value) drawer.value = false // auto tutup setelah pilih menu di mobile
+  router.push({ name: value })   // ⬅️ ini bikin navigasi ke route sesuai "name"
+  if (isMobile.value) drawer.value = false
 }
 </script>
+
+
 
 <style scoped>
 .sidebar {
@@ -89,8 +108,8 @@ function selectMenu(value) {
   width: 100%;
 }
 
-/* Toggle Button */
-.sidebar-toggle {
+/* === TOGGLE BUTTON DESKTOP (inside drawer) === */
+.sidebar-toggle-inside {
   position: absolute;
   top: 50%;
   right: -20px;
@@ -101,13 +120,32 @@ function selectMenu(value) {
   box-shadow: 0 2px 8px rgba(0,0,0,0.3);
   transition: transform 0.3s ease;
 }
-
-.sidebar-toggle.rotated {
+.sidebar-toggle-inside.rotated {
   transform: translateY(-50%) rotate(180deg);
 }
-
-.sidebar-toggle:hover {
+.sidebar-toggle-inside:hover {
   background-color: #115293;
   transform: translateY(-50%) scale(1.1);
+}
+
+/* === TOGGLE BUTTON MOBILE (outside drawer, fixed) === */
+.sidebar-toggle-outside {
+  position: fixed;
+  top: 50%;
+  left: 0;
+  transform: translate(-50%, -50%);
+  background-color: #1976d2;
+  color: white;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  transition: transform 0.3s ease;
+  z-index: 3000;
+}
+.sidebar-toggle-outside.rotated {
+  transform: translate(-50%, -50%) rotate(180deg);
+}
+.sidebar-toggle-outside:hover {
+  background-color: #115293;
+  transform: translate(-50%, -50%) scale(1.1);
 }
 </style>

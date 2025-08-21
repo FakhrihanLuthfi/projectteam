@@ -1,9 +1,7 @@
 <template>
   <v-app>
     <!-- App Bar -->
-    <v-app-bar app flat>
-
-    </v-app-bar>
+    <v-app-bar app flat></v-app-bar>
 
     <v-main>
       <v-container fluid class="pa-0">
@@ -80,8 +78,8 @@
               </v-card-title>
               <v-card-text>
                 <p class="text-subtitle-2 text-grey">Pendapatan 6 bulan terakhir</p>
-                <div class="bg-grey-lighten-4 rounded-lg d-flex align-center justify-center" style="height: 200px;">
-                  <span class="text-grey-darken-2">[Grafik di sini]</span>
+                <div class="bg-grey-lighten-4 rounded-lg pa-2" style="height: 200px;">
+                  <LineChart />
                 </div>
               </v-card-text>
             </v-card>
@@ -159,6 +157,7 @@
 </template>
 
 <script setup>
+import LineChart from "../components/LineChart.vue";
 </script>
 
 <style scoped>

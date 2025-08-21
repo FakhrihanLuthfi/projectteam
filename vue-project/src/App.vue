@@ -21,7 +21,7 @@ const route = useRoute();
       <!-- Main Content -->
       <div class="flex-grow-1">
         <Navbar />
-        <main class="container-fluid mt-3">
+        <main class="container-fluid main-content">
           <router-view />
         </main>
       </div>
@@ -32,5 +32,9 @@ const route = useRoute();
 <style>
 body {
   margin: 0;
+}
+
+.main-content {
+  padding-top: 70px; /* sesuaikan dengan tinggi Navbar kamu */
 }
 </style>

@@ -4,16 +4,40 @@ import { useRouter } from 'vue-router'
 
 const router = useRouter()
 
+// State form
 const username = ref('')
 const password = ref('')
+const email = ref('')
 const error = ref('')
+const mode = ref('login') // 'login' | 'register' | 'forgot'
 
+// Handle Login
 const handleLogin = () => {
   if (username.value === 'admin' && password.value === '1234') {
     localStorage.setItem('isLoggedIn', 'true')
-    router.push({ name: 'Dashboard' }) // langsung ke dashboard
+    router.push({ name: 'Dashboard' })
   } else {
     error.value = 'Username atau password salah!'
+  }
+}
+
+// Handle Register
+const handleRegister = () => {
+  if (username.value && email.value && password.value) {
+    alert(`Registrasi berhasil untuk ${username.value} (contoh saja)`)
+    mode.value = 'login'
+  } else {
+    error.value = 'Semua field harus diisi!'
+  }
+}
+
+// Handle Forgot Password
+const handleForgot = () => {
+  if (email.value) {
+    alert(`Link reset password dikirim ke ${email.value} (contoh saja)`)
+    mode.value = 'login'
+  } else {
+    error.value = 'Email harus diisi!'
   }
 }
 </script>
@@ -31,15 +55,22 @@ const handleLogin = () => {
       </div>
     </div>
 
-    <!-- Kanan: Form Login (tanpa card) -->
+    <!-- Kanan: Form -->
     <div class="login-right">
       <div class="login-content">
         <div class="login-header">
-          <i class="login-icon"></i>
-          <h2 class="text-primary">Selamat Datang</h2>
+          <h2 class="text-primary">
+            {{ mode === 'login' ? 'Selamat Datang' : mode === 'register' ? 'Daftar Akun' : 'Lupa Password' }}
+          </h2>
         </div>
-        <p class="subtitle">Masukkan username dan password</p>
-        <form @submit.prevent="handleLogin" class="login-form">
+        <p class="subtitle">
+          <span v-if="mode==='login'">Masukkan username dan password</span>
+          <span v-else-if="mode==='register'">Isi form untuk registrasi akun baru</span>
+          <span v-else>Masukkan email untuk reset password</span>
+        </p>
+
+        <!-- Form Login -->
+        <form v-if="mode==='login'" @submit.prevent="handleLogin" class="login-form">
           <div class="input-group">
             <i class="mdi mdi-account"></i>
             <input type="text" v-model="username" placeholder="Username" required />
@@ -48,11 +79,46 @@ const handleLogin = () => {
             <i class="mdi mdi-lock"></i>
             <input type="password" v-model="password" placeholder="Password" required />
           </div>
-
           <button type="submit" class="btn-login">
             <i class="mdi mdi-login"></i> Masuk
           </button>
           <p v-if="error" class="error-msg">{{ error }}</p>
+          <p class="link" @click="mode='register'">Belum punya akun? Register</p>
+          <p class="link" @click="mode='forgot'">Lupa password?</p>
+        </form>
+
+        <!-- Form Register -->
+        <form v-else-if="mode==='register'" @submit.prevent="handleRegister" class="login-form">
+          <div class="input-group">
+            <i class="mdi mdi-account-plus"></i>
+            <input type="text" v-model="username" placeholder="Username" required />
+          </div>
+          <div class="input-group">
+            <i class="mdi mdi-email"></i>
+            <input type="email" v-model="email" placeholder="Email" required />
+          </div>
+          <div class="input-group">
+            <i class="mdi mdi-lock"></i>
+            <input type="password" v-model="password" placeholder="Password" required />
+          </div>
+          <button type="submit" class="btn-login">
+            <i class="mdi mdi-account-check"></i> Daftar
+          </button>
+          <p v-if="error" class="error-msg">{{ error }}</p>
+          <p class="link" @click="mode='login'">Sudah punya akun? Login</p>
+        </form>
+
+        <!-- Form Lupa Password -->
+        <form v-else @submit.prevent="handleForgot" class="login-form">
+          <div class="input-group">
+            <i class="mdi mdi-email"></i>
+            <input type="email" v-model="email" placeholder="Email" required />
+          </div>
+          <button type="submit" class="btn-login">
+            <i class="mdi mdi-lock-reset"></i> Kirim Link Reset
+          </button>
+          <p v-if="error" class="error-msg">{{ error }}</p>
+          <p class="link" @click="mode='login'">Kembali ke Login</p>
         </form>
       </div>
     </div>
@@ -110,9 +176,9 @@ const handleLogin = () => {
 
 /* Konten login */
 .login-content {
-  width: 90%;
-  max-width: 100%;
-  padding: 2rem 2rem;
+  width: 100%;
+  max-width: 400px;
+  padding: 2rem;
 }
 
 .login-header {
@@ -200,32 +266,32 @@ const handleLogin = () => {
 /* 📱 Responsif untuk mobile */
 @media (max-width: 768px) {
   .login-wrapper {
-    flex-direction: column; /* ubah jadi vertikal */
+    flex-direction: column;
+    height: 100vh;
+    background-image: url('https://cove-blog-id.sgp1.cdn.digitaloceanspaces.com/cove-blog-id/2022/04/image5.jpg');
+    background-size: cover;
+    background-position: center;
+    justify-content: center;
+    align-items: center;
   }
 
   .login-left {
-    flex: none;
-    height: 200px; /* tinggi gambar di atas */
+    display: none; /* sembunyikan bagian kiri */
   }
 
   .login-right {
     flex: none;
-    height: auto;
-    padding: 1rem;
-  }
-
-  .brand-title {
-    font-size: 1.8rem;
-  }
-  .brand-subtitle {
-    font-size: 1rem;
-  }
-  .login-content {
-    padding: 1.5rem 1rem;
     width: 100%;
     max-width: 400px;
+    background: rgba(255, 255, 255, 0.9); /* kasih efek transparan */
+    padding: 2rem 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  }
+
+  .login-content {
+    width: 100%;
     margin: auto;
   }
 }
 </style>
-
