@@ -60,7 +60,7 @@
                   Rp 25.000.000
                 </v-card-text>
                 <v-card-actions>
-                  <v-btn text small color="success">Lihat Laporan</v-btn>
+                  <v-btn a href="/reports" text small color="success">Lihat Laporan</v-btn>
                 </v-card-actions>
               </v-card>
             </v-hover>

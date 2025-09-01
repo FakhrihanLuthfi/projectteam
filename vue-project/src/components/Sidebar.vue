@@ -25,15 +25,19 @@
       </v-list>
 
       <!-- Profil Admin -->
-      <div class="admin-section pa-4 d-flex align-center mt-auto">
-        <v-avatar color="white" size="40">
-          <v-icon color="primary">mdi-account-circle</v-icon>
-        </v-avatar>
-        <div class="ml-3">
-          <div class="font-weight-medium">Admin Kost</div>
-          <div class="text-caption text-white-70">admin@kostku.com</div>
-        </div>
-      </div>
+<div  
+  class="admin-section pa-4 d-flex align-center mt-auto"
+  style="cursor: pointer"
+  @click="goToPengaturan"
+>
+  <v-avatar color="white" size="40">
+    <v-icon color="primary">mdi-account-circle</v-icon>
+  </v-avatar>
+  <div class="ml-3">
+    <div class="font-weight-medium">Admin Kost</div>
+    <div class="text-caption text-white-70">admin@kostku.com</div>
+  </div>
+</div>
  
       <!-- Toggle button di DESKTOP (nempel di drawer) -->
       <v-btn
@@ -65,6 +69,11 @@ import { ref, computed, watch } from "vue"
 import { useDisplay } from "vuetify"
 import { useRouter } from "vue-router"
 
+function goToPengaturan() {
+  router.push({ name: "settings" }) 
+  // atau router.push("/pengaturan") kalau route kamu path-based
+}
+
 const drawer = ref(true)
 const activeMenu = ref("home")
 
@@ -83,7 +92,7 @@ const menuItems = [
   { title: "Daftar Penyewa", value: "tenants", icon: "mdi-account-group-outline" },
   { title: "Laporan", value: "reports", icon: "mdi-file-chart-outline" },
   { title: "Bantuan", value: "help", icon: "mdi-help-circle-outline" },
-  { title: "Pengaturan", value: "settings", icon: "mdi-cog-outline" },
+  // { title: "Pengaturan", value: "settings", icon: "mdi-cog-outline" },
 ]
 
 function selectMenu(value) {
