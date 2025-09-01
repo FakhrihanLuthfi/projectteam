@@ -5,6 +5,7 @@ import Room from "@/components/Room.vue";
 import Tenant from "@/components/Tenant.vue";
 import Settings from "@/components/Settings.vue";
 import Help from "@/components/Help.vue";
+import Laporan from "@/components/Laporan.vue";
 
 const routes = [
   {
@@ -40,6 +41,11 @@ const routes = [
     path: "/help", 
     name: "help", 
     component: Help 
+  },
+  {
+    path: "/laporan",
+    name: "reports",
+    component: Laporan,
   },
 ];
 
