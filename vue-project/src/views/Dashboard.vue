@@ -37,7 +37,7 @@
                 </v-card-title>
                 <v-card-text class="text-h5 font-weight-bold">45 Orang</v-card-text>
                 <v-card-actions>
-                  <v-btn text small color="primary">Lihat Detail</v-btn>
+                  <v-btn a href="/tenants" text small color="primary">Lihat Detail</v-btn>
                 </v-card-actions>
               </v-card>
             </v-hover>
@@ -83,7 +83,7 @@
                   8 Kamar
                 </v-card-text>
                 <v-card-actions>
-                  <v-btn text small color="warning">Lihat Kamar</v-btn>
+                  <v-btn a href="/rooms" text small color="warning">Lihat Kamar</v-btn>
                 </v-card-actions>
               </v-card>
             </v-hover>

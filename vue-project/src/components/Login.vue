@@ -83,8 +83,8 @@ const handleForgot = () => {
             <i class="mdi mdi-login"></i> Masuk
           </button>
           <p v-if="error" class="error-msg">{{ error }}</p>
-          <p class="link" @click="mode='register'">Belum punya akun? Register</p>
-          <p class="link" @click="mode='forgot'">Lupa password?</p>
+          <p type="submit" class="link" @click="mode='register'">Belum punya akun? Register</p>
+          <p type="submit" class="link" @click="mode='forgot'">Lupa password?</p>
         </form>
 
         <!-- Form Register -->
@@ -105,7 +105,7 @@ const handleForgot = () => {
             <i class="mdi mdi-account-check"></i> Daftar
           </button>
           <p v-if="error" class="error-msg">{{ error }}</p>
-          <p class="link" @click="mode='login'">Sudah punya akun? Login</p>
+          <p type="submit" class="link" @click="mode='login'">Sudah punya akun? Login</p>
         </form>
 
         <!-- Form Lupa Password -->
@@ -118,7 +118,7 @@ const handleForgot = () => {
             <i class="mdi mdi-lock-reset"></i> Kirim Link Reset
           </button>
           <p v-if="error" class="error-msg">{{ error }}</p>
-          <p class="link" @click="mode='login'">Kembali ke Login</p>
+          <p type="submit" class="link" @click="mode='login'">Kembali ke Login</p>
         </form>
       </div>
     </div>

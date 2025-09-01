@@ -5,68 +5,64 @@ import Room from "@/components/Room.vue";
 import Tenant from "@/components/Tenant.vue";
 import Settings from "@/components/Settings.vue";
 import Help from "@/components/Help.vue";
-import Laporan from "@/components/Laporan.vue";
 
 const routes = [
   {
-    path: "/",
-    name: "Login",
+    path: '/',
+    name: 'Login',
     component: Login,
     meta: { requiresAuth: false },
   },
   {
-    path: "/dashboard",
-    name: "Dashboard",
+    path: '/dashboard',
+    name: 'Dashboard',
     component: Dashboard,
     meta: { requiresAuth: true }, // butuh login
   },
-   { 
-    path: "/rooms", 
-    name: "rooms", 
-    component: Room
+  {
+    path: '/rooms',
+    name: 'rooms',
+    component: Room,
+    meta: { requiresAuth: true }, // butuh login
   },
   {
-    path: "/tenants",
-    name: "tenants",
-    component: Tenant,   // ⬅️ route daftar penyewa
+    path: '/tenants',
+    name: 'tenants',
+    component: Tenant, // ⬅️ route daftar penyewa
     meta: { requiresAuth: true },
   },
   {
-    path: "/settings", 
-    name: "settings", 
+    path: '/settings',
+    name: 'settings',
     component: Settings,
     meta: { requiresAuth: true },
   },
   {
-    path: "/help", 
-    name: "help", 
-    component: Help 
-  },
-  {
-    path: "/laporan",
-    name: "reports",
-    component: Laporan,
+    path: '/help',
+    name: 'help',
+    component: Help,
+    meta: { requiresAuth: true }, // butuh login
   },
 ];
 
 const router = createRouter({
   history: createWebHistory(),
   routes,
-});
+})
 
 // Route Guard
 router.beforeEach((to, from, next) => {
-  const isLoggedIn = localStorage.getItem("isLoggedIn");
+  const isLoggedIn = localStorage.getItem('isLoggedIn')
 
   if (to.meta.requiresAuth && !isLoggedIn) {
     // kalau belum login tapi mau ke dashboard → redirect ke login
-    next({ name: "Login" });
-  } else if (to.name === "Login" && isLoggedIn) {
+    next({ name: 'Login' })
+  } else if (to.name === 'Login' && isLoggedIn) {
     // kalau sudah login, jangan balik ke login lagi → langsung ke dashboard
-    next({ name: "Dashboard" });
+    next({ name: 'Dashboard' })
   } else {
-    next();
+    next()
   }
-});
+})
 
-export default router;
+export default router
