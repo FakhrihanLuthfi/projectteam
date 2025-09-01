@@ -5,6 +5,7 @@ import Room from "@/components/Room.vue";
 import Tenant from "@/components/Tenant.vue";
 import Settings from "@/components/Settings.vue";
 import Help from "@/components/Help.vue";
+import Laporan from "@/components/Laporan.vue";
 
 const routes = [
   {
@@ -43,6 +44,13 @@ const routes = [
     component: Help,
     meta: { requiresAuth: true }, // butuh login
   },
+  {
+    path: '/reports',
+    name: 'reports',
+    component: Laporan,
+    meta: { requiresAuth: true }, // butuh login
+  },
+
 ];
 
 const router = createRouter({

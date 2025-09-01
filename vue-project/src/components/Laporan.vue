@@ -6,7 +6,7 @@
 
       <div class="d-flex gap-2">
         <!-- Tombol Tambahkan Laporan -->
-        <v-btn color="success" prepend-icon="mdi-plus" @click="tambahLaporan">
+        <v-btn color="success" prepend-icon="mdi-plus" @click="openAddDialog">
           Tambahkan Laporan
         </v-btn>
 
@@ -108,6 +108,23 @@
       </template>
     </v-data-table>
 
+    <!-- Dialog Tambah Laporan -->
+    <v-dialog v-model="dialogAdd" max-width="500">
+      <v-card>
+        <v-card-title>Tambah Laporan</v-card-title>
+        <v-card-text>
+          <v-text-field v-model="newData.date" label="Tanggal" type="date" outlined dense />
+          <v-text-field v-model="newData.description" label="Deskripsi" outlined dense />
+          <v-text-field v-model.number="newData.amount" label="Jumlah" type="number" outlined dense />
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer />
+          <v-btn text @click="dialogAdd = false">Batal</v-btn>
+          <v-btn color="success" @click="saveAdd">Simpan</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
     <!-- Dialog Edit Laporan -->
     <v-dialog v-model="dialogEdit" max-width="500">
       <v-card>
@@ -158,7 +175,7 @@ const headers = [
   { text: "Tanggal", value: "date" },
   { text: "Deskripsi", value: "description" },
   { text: "Jumlah", value: "amount" },
-  { text: "Aksi", value: "actions", sortable: false }, // kolom aksi
+  { text: "Aksi", value: "actions", sortable: false },
 ]
 
 const items = ref([
@@ -166,6 +183,22 @@ const items = ref([
   { date: "2025-08-05", description: "Pembayaran Kost B", amount: 1100000 },
   { date: "2025-08-10", description: "Pembayaran Kost C", amount: 1250000 },
 ])
+
+/* === Dialog Tambah === */
+const dialogAdd = ref(false)
+const newData = ref({ date: "", description: "", amount: 0 })
+
+function openAddDialog() {
+  newData.value = { date: "", description: "", amount: 0 }
+  dialogAdd.value = true
+}
+
+function saveAdd() {
+  if (newData.value.date && newData.value.description && newData.value.amount) {
+    items.value.push({ ...newData.value })
+    dialogAdd.value = false
+  }
+}
 
 /* === Dialog Edit === */
 const dialogEdit = ref(false)
@@ -201,12 +234,7 @@ function confirmDelete() {
   dialogDelete.value = false
 }
 
-/* === Fungsi Tambahkan Laporan === */
-function tambahLaporan() {
-  alert("Form Tambah Laporan akan ditampilkan di sini")
-}
-
-/* === Filter berdasarkan range tanggal === */
+/* === Filter === */
 const filteredItems = computed(() => {
   return items.value.filter(item => {
     const itemDate = new Date(item.date)
@@ -219,12 +247,11 @@ const filteredItems = computed(() => {
   })
 })
 
-/* === Hitung Total Amount === */
+/* === Total === */
 const totalAmount = computed(() =>
   filteredItems.value.reduce((sum, item) => sum + item.amount, 0)
 )
 
-/* === Gabungkan data dengan baris Total === */
 const itemsWithTotal = computed(() => {
   return [
     ...filteredItems.value,
@@ -267,11 +294,7 @@ function exportPDF() {
     item.description,
     "Rp " + item.amount.toLocaleString(),
   ])
-  body.push([
-    "",
-    "TOTAL",
-    "Rp " + totalAmount.value.toLocaleString(),
-  ])
+  body.push(["", "TOTAL", "Rp " + totalAmount.value.toLocaleString()])
 
   autoTable(doc, {
     head: [["Tanggal", "Deskripsi", "Jumlah"]],
