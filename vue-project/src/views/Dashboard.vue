@@ -275,6 +275,7 @@
 
 <script setup>
 import { ref } from "vue";
+import LineChart from "@/components/LineChart.vue"
 
 const dialogTambah = ref(false);
 const snackbar = ref(false);
