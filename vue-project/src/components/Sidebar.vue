@@ -25,7 +25,7 @@
       </v-list>
 
       <!-- Profil Admin -->
-<div  
+  <div  
   class="admin-section pa-4 d-flex align-center mt-auto"
   style="cursor: pointer"
   @click="goToPengaturan"

@@ -18,9 +18,13 @@
     "axios": "^1.11.0",
     "chart.js": "^4.5.0",
     "crypto-browserify": "^3.12.1",
+<<<<<<< HEAD
     "file-saver": "^2.0.5",
     "jspdf": "^3.0.2",
     "jspdf-autotable": "^5.0.2",
+=======
+    "depends": "^1.0.0",
+>>>>>>> bfbf8448510f1403fa5eb22cf458c531410a0487
     "vue": "^3.5.18",
     "vue-chartjs": "^5.3.2",
     "vue-router": "^4.5.1",

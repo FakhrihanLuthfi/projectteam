@@ -25,7 +25,15 @@
         <!-- Password -->
         <v-text-field
           v-model="settings.password"
-          label="Password"
+          label="Current Password"
+          type="password"
+          outlined
+          dense
+          class="mb-3"
+        />
+        <v-text-field
+          v-model="settings.password"
+          label="New Password"
           type="password"
           outlined
           dense
