@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import api from '../services/axios.js'
 
 const router = useRouter()
 
@@ -11,10 +12,10 @@ const email = ref('')
 const error = ref('')
 const mode = ref('login') // 'login' | 'register' | 'forgot'
 
-// Handle Login
 const handleLogin = () => {
   if (username.value === 'admin' && password.value === '1234') {
     localStorage.setItem('isLoggedIn', 'true')
+
     router.push({ name: 'Dashboard' })
   } else {
     error.value = 'Username atau password salah!'
@@ -60,17 +61,23 @@ const handleForgot = () => {
       <div class="login-content">
         <div class="login-header">
           <h2 class="text-primary">
-            {{ mode === 'login' ? 'Selamat Datang' : mode === 'register' ? 'Daftar Akun' : 'Lupa Password' }}
+            {{
+              mode === 'login'
+                ? 'Selamat Datang'
+                : mode === 'register'
+                  ? 'Daftar Akun'
+                  : 'Lupa Password'
+            }}
           </h2>
         </div>
         <p class="subtitle">
-          <span v-if="mode==='login'">Masukkan username dan password</span>
-          <span v-else-if="mode==='register'">Isi form untuk registrasi akun baru</span>
+          <span v-if="mode === 'login'">Masukkan username dan password</span>
+          <span v-else-if="mode === 'register'">Isi form untuk registrasi akun baru</span>
           <span v-else>Masukkan email untuk reset password</span>
         </p>
 
         <!-- Form Login -->
-        <form v-if="mode==='login'" @submit.prevent="handleLogin" class="login-form">
+        <form v-if="mode === 'login'" @submit.prevent="handleLogin" class="login-form">
           <div class="input-group">
             <i class="mdi mdi-account"></i>
             <input type="text" v-model="username" placeholder="Username" required />
@@ -79,16 +86,14 @@ const handleForgot = () => {
             <i class="mdi mdi-lock"></i>
             <input type="password" v-model="password" placeholder="Password" required />
           </div>
-          <button type="submit" class="btn-login">
-            <i class="mdi mdi-login"></i> Masuk
-          </button>
+          <button type="submit" class="btn-login"><i class="mdi mdi-login"></i> Masuk</button>
           <p v-if="error" class="error-msg">{{ error }}</p>
-          <p type="submit" class="link" @click="mode='register'">Belum punya akun? Register</p>
-          <p type="submit" class="link" @click="mode='forgot'">Lupa password?</p>
+          <p type="submit" class="link" @click="mode = 'register'">Belum punya akun? Register</p>
+          <p type="submit" class="link" @click="mode = 'forgot'">Lupa password?</p>
         </form>
 
         <!-- Form Register -->
-        <form v-else-if="mode==='register'" @submit.prevent="handleRegister" class="login-form">
+        <form v-else-if="mode === 'register'" @submit.prevent="handleRegister" class="login-form">
           <div class="input-group">
             <i class="mdi mdi-account-plus"></i>
             <input type="text" v-model="username" placeholder="Username" required />
@@ -105,7 +110,7 @@ const handleForgot = () => {
             <i class="mdi mdi-account-check"></i> Daftar
           </button>
           <p v-if="error" class="error-msg">{{ error }}</p>
-          <p type="submit" class="link" @click="mode='login'">Sudah punya akun? Login</p>
+          <p type="submit" class="link" @click="mode = 'login'">Sudah punya akun? Login</p>
         </form>
 
         <!-- Form Lupa Password -->
@@ -118,7 +123,7 @@ const handleForgot = () => {
             <i class="mdi mdi-lock-reset"></i> Kirim Link Reset
           </button>
           <p v-if="error" class="error-msg">{{ error }}</p>
-          <p type="submit" class="link" @click="mode='login'">Kembali ke Login</p>
+          <p type="submit" class="link" @click="mode = 'login'">Kembali ke Login</p>
         </form>
       </div>
     </div>
@@ -202,7 +207,7 @@ const handleForgot = () => {
   color: #555;
   font-size: 0.95rem;
   margin: 0.5rem 0 1.5rem;
-  text-align: center; 
+  text-align: center;
 }
 
 /* Form */
@@ -246,7 +251,9 @@ const handleForgot = () => {
   font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
-  transition: background 0.3s, transform 0.2s;
+  transition:
+    background 0.3s,
+    transform 0.2s;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -286,7 +293,7 @@ const handleForgot = () => {
     background: rgba(255, 255, 255, 0.9); /* kasih efek transparan */
     padding: 2rem 1.5rem;
     border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   }
 
   .login-content {
