@@ -43,7 +43,7 @@ const handleForgot = () => {
 </script>
 
 <template>
-  <div class="login-wrapper">
+  <div   class="login-wrapper">
     <!-- Kiri: Branding + Gambar -->
     <div class="login-left">
       <div class="brand-content">

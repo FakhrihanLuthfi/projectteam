@@ -20,7 +20,7 @@
     </v-row>
 
     <!-- Modal Detail -->
-    <v-dialog v-model="dialog" position="center" max-height="6000px" max-width="700px">
+    <v-dialog v-model="dialog" position="center"  width="1000px" max-height="6000px" max-width="700px">
       <v-card v-if="selectedRoom" class="rounded-xl">
         <v-img :src="selectedRoom.foto" height="650" cover class="rounded-t-xl"></v-img>
         <v-card-title>{{ selectedRoom.name }}</v-card-title>
