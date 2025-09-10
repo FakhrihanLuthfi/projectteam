@@ -1,5 +1,10 @@
 {
   "compilerOptions": {
+    "plugins": [
+      {
+        "name": "@vue/typescript-plugin"
+      }
+    ],
     "target": "ESNext",
     "module": "ESNext",
     "moduleResolution": "Node",

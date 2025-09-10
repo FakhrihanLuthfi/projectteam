@@ -21,7 +21,6 @@ const handleLogin = () => {
     error.value = 'Username atau password salah!'
   }
 }
-
 // Handle Register
 const handleRegister = () => {
   if (username.value && email.value && password.value) {
@@ -44,7 +43,7 @@ const handleForgot = () => {
 </script>
 
 <template>
-  <div class="login-wrapper">
+  <div   class="login-wrapper">
     <!-- Kiri: Branding + Gambar -->
     <div class="login-left">
       <div class="brand-content">
@@ -97,7 +96,7 @@ const handleForgot = () => {
           <div class="input-group">
             <i class="mdi mdi-account-plus"></i>
             <input type="text" v-model="username" placeholder="Username" required />
-          </div>
+         </div>
           <div class="input-group">
             <i class="mdi mdi-email"></i>
             <input type="email" v-model="email" placeholder="Email" required />
