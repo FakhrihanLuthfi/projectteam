@@ -13,9 +13,7 @@
         <!-- Tombol Export -->
         <v-menu>
           <template v-slot:activator="{ props }">
-            <v-btn color="primary" prepend-icon="mdi-download" v-bind="props">
-              Export
-            </v-btn>
+            <v-btn color="primary" prepend-icon="mdi-download" v-bind="props"> Export </v-btn>
           </template>
           <v-list>
             <v-list-item @click="exportExcel">
@@ -43,9 +41,21 @@
 
       <!-- Tanggal Mulai -->
       <v-col cols="12" md="3">
-        <v-menu v-model="menuStart" :close-on-content-click="false" transition="scale-transition" offset-y>
+        <v-menu
+          v-model="menuStart"
+          :close-on-content-click="false"
+          transition="scale-transition"
+          offset-y
+        >
           <template v-slot:activator="{ props }">
-            <v-text-field v-model="startDate" label="Tanggal Mulai" readonly v-bind="props" outlined dense />
+            <v-text-field
+              v-model="startDate"
+              label="Tanggal Mulai"
+              readonly
+              v-bind="props"
+              outlined
+              dense
+            />
           </template>
           <v-date-picker v-model="startDate" @input="menuStart = false" />
         </v-menu>
@@ -53,9 +63,21 @@
 
       <!-- Tanggal Akhir -->
       <v-col cols="12" md="3">
-        <v-menu v-model="menuEnd" :close-on-content-click="false" transition="scale-transition" offset-y>
+        <v-menu
+          v-model="menuEnd"
+          :close-on-content-click="false"
+          transition="scale-transition"
+          offset-y
+        >
           <template v-slot:activator="{ props }">
-            <v-text-field v-model="endDate" label="Tanggal Akhir" readonly v-bind="props" outlined dense />
+            <v-text-field
+              v-model="endDate"
+              label="Tanggal Akhir"
+              readonly
+              v-bind="props"
+              outlined
+              dense
+            />
           </template>
           <v-date-picker v-model="endDate" @input="menuEnd = false" />
         </v-menu>
@@ -63,20 +85,13 @@
     </v-row>
 
     <!-- Tabel Laporan -->
-    <v-data-table
-      :headers="headers"
-      :items="itemsWithTotal"
-      :search="search"
-      class="elevation-1"
-    >
+    <v-data-table :headers="headers" :items="itemsWithTotal" :search="search" class="elevation-1">
       <!-- Format angka -->
       <template v-slot:item.amount="{ item }">
         <span v-if="item.isTotal" class="font-weight-bold text-primary">
           Rp {{ item.amount.toLocaleString() }}
         </span>
-        <span v-else>
-          Rp {{ item.amount.toLocaleString() }}
-        </span>
+        <span v-else> Rp {{ item.amount.toLocaleString() }} </span>
       </template>
 
       <!-- Bold baris Total -->
@@ -115,7 +130,13 @@
         <v-card-text>
           <v-text-field v-model="newData.date" label="Tanggal" type="date" outlined dense />
           <v-text-field v-model="newData.description" label="Deskripsi" outlined dense />
-          <v-text-field v-model.number="newData.amount" label="Jumlah" type="number" outlined dense />
+          <v-text-field
+            v-model.number="newData.amount"
+            label="Jumlah"
+            type="number"
+            outlined
+            dense
+          />
         </v-card-text>
         <v-card-actions>
           <v-spacer />
@@ -132,7 +153,13 @@
         <v-card-text>
           <v-text-field v-model="editData.date" label="Tanggal" type="date" outlined dense />
           <v-text-field v-model="editData.description" label="Deskripsi" outlined dense />
-          <v-text-field v-model.number="editData.amount" label="Jumlah" type="number" outlined dense />
+          <v-text-field
+            v-model.number="editData.amount"
+            label="Jumlah"
+            type="number"
+            outlined
+            dense
+          />
         </v-card-text>
         <v-card-actions>
           <v-spacer />
@@ -146,9 +173,7 @@
     <v-dialog v-model="dialogDelete" max-width="400" persistent>
       <v-card>
         <v-card-title class="text-h6">Konfirmasi Hapus</v-card-title>
-        <v-card-text>
-          Apakah Anda yakin ingin menghapus laporan ini?
-        </v-card-text>
+        <v-card-text> Apakah Anda yakin ingin menghapus laporan ini? </v-card-text>
         <v-card-actions class="justify-end">
           <v-btn text @click="dialogDelete = false">Batal</v-btn>
           <v-btn color="error" @click="confirmDelete">Ya, Hapus</v-btn>
@@ -159,37 +184,37 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue"
-import * as XLSX from "xlsx"
-import { saveAs } from "file-saver"
-import jsPDF from "jspdf"
-import autoTable from "jspdf-autotable"
+import { ref, computed } from 'vue'
+import * as XLSX from 'xlsx'
+import { saveAs } from 'file-saver'
+import jsPDF from 'jspdf'
+import autoTable from 'jspdf-autotable'
 
-const search = ref("")
-const startDate = ref("")
-const endDate = ref("")
+const search = ref('')
+const startDate = ref('')
+const endDate = ref('')
 const menuStart = ref(false)
 const menuEnd = ref(false)
 
-const headers = [
-  { text: "Tanggal", value: "date" },
-  { text: "Deskripsi", value: "description" },
-  { text: "Jumlah", value: "amount" },
-  { text: "Aksi", value: "actions", sortable: false },
-]
+const headers = ref([
+  { text: 'Tanggal', value: 'date' },
+  { text: 'Deskripsi', value: 'description' },
+  { text: 'Jumlah', value: 'amount' },
+  { text: 'Aksi', value: 'actions', sortable: false },
+])
 
 const items = ref([
-  { date: "2025-08-01", description: "Pembayaran Kost A", amount: 1200000 },
-  { date: "2025-08-05", description: "Pembayaran Kost B", amount: 1100000 },
-  { date: "2025-08-10", description: "Pembayaran Kost C", amount: 1250000 },
+  { date: '2025-08-01', description: 'Pembayaran Kost A', amount: 1200000 },
+  { date: '2025-08-05', description: 'Pembayaran Kost B', amount: 1100000 },
+  { date: '2025-08-10', description: 'Pembayaran Kost C', amount: 1250000 },
 ])
 
 /* === Dialog Tambah === */
 const dialogAdd = ref(false)
-const newData = ref({ date: "", description: "", amount: 0 })
+const newData = ref({ date: '', description: '', amount: 0 })
 
 function openAddDialog() {
-  newData.value = { date: "", description: "", amount: 0 }
+  newData.value = { date: '', description: '', amount: 0 }
   dialogAdd.value = true
 }
 
@@ -203,7 +228,7 @@ function saveAdd() {
 /* === Dialog Edit === */
 const dialogEdit = ref(false)
 const editIndex = ref(null)
-const editData = ref({ date: "", description: "", amount: 0 })
+const editData = ref({ date: '', description: '', amount: 0 })
 
 function openEditDialog(item, index) {
   editIndex.value = index
@@ -236,7 +261,7 @@ function confirmDelete() {
 
 /* === Filter === */
 const filteredItems = computed(() => {
-  return items.value.filter(item => {
+  return items.value.filter((item) => {
     const itemDate = new Date(item.date)
     const start = startDate.value ? new Date(startDate.value) : null
     const end = endDate.value ? new Date(endDate.value) : null
@@ -248,17 +273,15 @@ const filteredItems = computed(() => {
 })
 
 /* === Total === */
-const totalAmount = computed(() =>
-  filteredItems.value.reduce((sum, item) => sum + item.amount, 0)
-)
+const totalAmount = computed(() => filteredItems.value.reduce((sum, item) => sum + item.amount, 0))
 
 const itemsWithTotal = computed(() => {
   return [
     ...filteredItems.value,
     {
-      description: "TOTAL",
+      description: 'TOTAL',
       amount: totalAmount.value,
-      date: "",
+      date: '',
       isTotal: true,
     },
   ]
@@ -266,42 +289,42 @@ const itemsWithTotal = computed(() => {
 
 /* === Export Excel === */
 function exportExcel() {
-  const exportData = filteredItems.value.map(item => ({
+  const exportData = filteredItems.value.map((item) => ({
     Tanggal: item.date,
     Deskripsi: item.description,
     Jumlah: item.amount,
   }))
   exportData.push({
-    Tanggal: "",
-    Deskripsi: "TOTAL",
+    Tanggal: '',
+    Deskripsi: 'TOTAL',
     Jumlah: totalAmount.value,
   })
 
   const worksheet = XLSX.utils.json_to_sheet(exportData)
   const workbook = XLSX.utils.book_new()
-  XLSX.utils.book_append_sheet(workbook, worksheet, "Laporan")
-  const excelBuffer = XLSX.write(workbook, { bookType: "xlsx", type: "array" })
-  saveAs(new Blob([excelBuffer]), "laporan.xlsx")
+  XLSX.utils.book_append_sheet(workbook, worksheet, 'Laporan')
+  const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' })
+  saveAs(new Blob([excelBuffer]), 'laporan.xlsx')
 }
 
 /* === Export PDF === */
 function exportPDF() {
   const doc = new jsPDF()
-  doc.text("Laporan Kost", 14, 15)
+  doc.text('Laporan Kost', 14, 15)
 
-  const body = filteredItems.value.map(item => [
+  const body = filteredItems.value.map((item) => [
     item.date,
     item.description,
-    "Rp " + item.amount.toLocaleString(),
+    'Rp ' + item.amount.toLocaleString(),
   ])
-  body.push(["", "TOTAL", "Rp " + totalAmount.value.toLocaleString()])
+  body.push(['', 'TOTAL', 'Rp ' + totalAmount.value.toLocaleString()])
 
   autoTable(doc, {
-    head: [["Tanggal", "Deskripsi", "Jumlah"]],
+    head: [['Tanggal', 'Deskripsi', 'Jumlah']],
     body,
     startY: 20,
   })
 
-  doc.save("laporan.pdf")
+  doc.save('laporan.pdf')
 }
 </script>

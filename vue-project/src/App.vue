@@ -35,6 +35,6 @@ body {
 }
 
 .main-content {
-  padding-top: 70px; /* sesuaikan dengan tinggi Navbar kamu */
+  padding-top: 70px;
 }
 </style>

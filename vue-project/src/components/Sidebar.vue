@@ -91,9 +91,21 @@ const menuItems = [
   { title: "Daftar Kamar", value: "rooms", icon: "mdi-door-closed-lock" },
   { title: "Daftar Penyewa", value: "tenants", icon: "mdi-account-group-outline" },
   { title: "Laporan", value: "reports", icon: "mdi-file-chart-outline" },
+  { title: "Keuangan", value: "finance", icon: "mdi-cash-multiple" },
+  { title: "Tagihan & Pembayaran", value: "billing", icon: "mdi-receipt-text-outline" },
+  { title: "Aset Kost", value: "assets", icon: "mdi-domain" },
+  { title: "Jadwal Pembersihan", value: "cleaning", icon: "mdi-broom" },
+  { title: "Layanan Laundry", value: "laundry", icon: "mdi-washing-machine" },
+  { title: "Layanan Makanan", value: "food-service", icon: "mdi-food-outline" },
+  { title: "Event & Komunitas", value: "events", icon: "mdi-calendar-account" },
+  { title: "Chat & Komunikasi", value: "chat", icon: "mdi-chat-processing-outline" },
+  { title: "Notifikasi", value: "notifications", icon: "mdi-bell-outline" },
+  { title: "Monitoring CCTV", value: "cctv", icon: "mdi-cctv" },
+  { title: "Pengaturan", value: "settings", icon: "mdi-cog-outline" },
   { title: "Bantuan", value: "help", icon: "mdi-help-circle-outline" },
-  // { title: "Pengaturan", value: "settings", icon: "mdi-cog-outline" },
-]
+];
+
+
 
 function selectMenu(value) {
   activeMenu.value = value

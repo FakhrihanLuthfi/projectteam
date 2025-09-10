@@ -10,7 +10,7 @@
       <span class="text-h6 font-weight-bold">KostEase</span>
     </div>
     <!-- Tombol Logout Putih -->
-     <v-spacer></v-spacer>
+    <v-spacer></v-spacer>
     <v-btn color="white" variant="contained" @click="handleLogout">
       <v-icon left color="">mdi-logout</v-icon>
       <span class="text-white">Logout</span>
@@ -19,17 +19,15 @@
 </template>
 
 <script setup>
-import { useRouter } from "vue-router"
+import { useRouter } from 'vue-router'
 
 const router = useRouter()
 
 function handleLogout() {
-  localStorage.removeItem("isLoggedIn")
-  router.push({ name: "Login" })
+  localStorage.removeItem('isLoggedIn')
+  router.push({ name: 'Login' })
 }
 </script>
-
-
 
 <style scoped>
 .navbar-brand {
@@ -39,7 +37,6 @@ function handleLogout() {
 
 .v-btn {
   transition: all 0.2s;
-
 }
 
 .v-btn:hover {
